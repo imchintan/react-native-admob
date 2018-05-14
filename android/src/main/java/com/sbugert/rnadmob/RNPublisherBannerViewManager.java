@@ -158,6 +158,15 @@ public class RNPublisherBannerViewManager extends SimpleViewManager<ReactViewGro
   @ReactProp(name = PROP_BANNER_SIZE)
   public void setBannerSize(final ReactViewGroup view, final String sizeString) {
     AdSize adSize = getAdSizeFromString(sizeString);
+    int isCustom=sizeString.indexOf("custom");
+    if(isCustom > -1){
+        String[] tmpArray = sizeString.split("\\|");
+        String adSizeStr = tmpArray[1];
+        String[] adSizeArr =adSizeStr.split("x");
+        int adWidth = Integer.parseInt(adSizeArr[0]);
+        int adHeight = Integer.parseInt(adSizeArr[1]);
+        adSize = new AdSize(adWidth,adHeight);
+    }
     AdSize[] adSizes = new AdSize[1];
     adSizes[0] = adSize;
 

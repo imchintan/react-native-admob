@@ -79,9 +79,9 @@ Under `protected List<ReactPackage> getPackages() {`:
 ### Usage
 
 ```javascript
-import { 
-  AdMobBanner, 
-  AdMobInterstitial, 
+import {
+  AdMobBanner,
+  AdMobInterstitial,
   PublisherBanner,
   AdMobRewarded
 } from 'react-native-admob'
@@ -96,6 +96,14 @@ import {
 // Display a DFP Publisher banner
 <PublisherBanner
   bannerSize="fullBanner"
+  adUnitID="your-admob-unit-id"
+  testDeviceID="EMULATOR"
+  didFailToReceiveAdWithError={this.bannerError}
+  admobDispatchAppEvent={this.adMobEvent} />
+
+// Display a DFP Publisher banner with custom width and height
+<PublisherBanner
+  bannerSize="custom|250x100" // custom|{width}x{height} 
   adUnitID="your-admob-unit-id"
   testDeviceID="EMULATOR"
   didFailToReceiveAdWithError={this.bannerError}

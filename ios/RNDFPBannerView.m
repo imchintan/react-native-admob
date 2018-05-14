@@ -51,6 +51,15 @@
 -(void)loadBanner {
     if (_adUnitID && _bannerSize) {
         GADAdSize size = [self getAdSizeFromString:_bannerSize];
+        NSString *custom = @"custom";
+        if([_bannerSize rangeOfString: custom ].location != NSNotFound){
+            NSString *tmpSizeStr = [_bannerSize componentsSeparatedByString:@"|"][1];
+            NSArray *tmpSizeArr = [tmpSizeStr componentsSeparatedByString:@"x"];
+            NSInteger width = [tmpSizeArr[0] integerValue];
+            NSInteger height = [tmpSizeArr[1] integerValue];
+            CGSize tmpSize=CGSizeMake(width, height);
+            size = GADAdSizeFromCGSize(tmpSize);
+        }
         _bannerView = [[DFPBannerView alloc] initWithAdSize:size];
         [_bannerView setAppEventDelegate:self]; //added Admob event dispatch listener
         if(!CGRectEqualToRect(self.bounds, _bannerView.bounds)) {
